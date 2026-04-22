@@ -197,6 +197,7 @@ function rakesh_assets() {
     wp_enqueue_script('parallax', get_template_directory_uri() . '/assets/lib/parallax/parallax.min.js', array('jquery'), null, true);
     wp_enqueue_script('isotope', get_template_directory_uri() . '/assets/lib/isotope/isotope.pkgd.min.js', array('jquery'), null, true);
     wp_enqueue_script('lightbox', get_template_directory_uri() . '/assets/lib/lightbox/js/lightbox.min.js', array('jquery'), null, true);
+	wp_enqueue_script('hero-carousel', get_template_directory_uri() . '/assets/js/hero-carousel.js', array('jquery'), null, true);
 
     // MAIN JS (MUST BE LAST)
     wp_enqueue_script(

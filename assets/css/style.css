@@ -89,7 +89,32 @@ h6,
     justify-content: center;
     font-weight: normal;
 }
+/* Initially, the navbar is visible */
+#navbar {
+    position: absolute; /* Not fixed initially */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: top 0.3s ease-in-out, background-color 0.3s ease;
+}
 
+/* When scrolling past a certain point, the navbar becomes sticky */
+#navbar.sticky {
+    position: fixed;
+    top: 0;
+    background-color: rgba(15, 66, 41, 0.9); /* Optionally change background */
+}
+
+/* This class will be used to minimize the navbar (or hide it slightly) */
+#navbar.minimized {
+    top: -80px;  /* Shrinks up when scrolling down */
+}
+
+/* Optionally: Add a shadow for sticky navbar */
+#navbar.sticky {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 
 /*** Navbar ***/
 .navbar-nav ul {
@@ -184,65 +209,137 @@ ul li {
     }
 }
 
+/* =========================
+   HERO CAROUSEL BASE
+========================= */
+.hero-carousel {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
 
-/*** Header ***/
-.carousel-caption {
+/* =========================
+   SLIDE BASE
+========================= */
+.hero-slide {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* =========================
+   PARALLAX IMAGE LAYER (FIXED FOR BETTER EFFECT)
+========================= */
+.hero-image-wrapper {
+    position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.hero-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.1);
+    transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 1;
+}
+
+/* =========================
+   OVERLAY
+========================= */
+.carousel-caption {
+    position: absolute;
+    inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: rgba(15, 66, 41, .6);
-    z-index: 1;
+    background: rgba(15, 66, 41, 0.45);
+    z-index: 2;
 }
 
+/* =========================
+   TEXT INITIAL STATE
+========================= */
+.carousel-caption h1,
+.carousel-caption a {
+    opacity: 0;
+    transform: translateY(60px);
+    filter: blur(10px);
+}
+
+/* =========================
+   ACTIVE SLIDE ANIMATION
+========================= */
+.hero-slide.active .carousel-caption h1 {
+    animation: heroText 1s ease forwards;
+}
+
+.hero-slide.active .carousel-caption a {
+    animation: heroText 1.2s ease forwards;
+}
+
+/* =========================
+   KEYFRAME (PRO FEEL)
+========================= */
+@keyframes heroText {
+    0% {
+        opacity: 0;
+        transform: translateY(60px);
+        filter: blur(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+/* =========================
+   PARALLAX SHIFT ON ACTIVE
+========================= */
+.hero-slide.active .hero-img {
+    transform: scale(1.15) translateY(-20px);
+}
+
+/* =========================
+   CONTROL STYLE
+========================= */
 .carousel-control-prev,
 .carousel-control-next {
-    width: 15%;
+    width: 10%;
+    z-index: 5;
 }
 
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 3rem;
-    background-color: var(--primary);
-    border: 10px solid var(--primary);
-}
-
+/* =========================
+   MOBILE FIXES
+========================= */
 @media (max-width: 768px) {
-    #header-carousel .carousel-item {
-        position: relative;
+    .hero-carousel .carousel-item {
         min-height: 450px;
     }
-    
-    #header-carousel .carousel-item img {
-        position: absolute;
-        width: 100%;
+
+    .hero-carousel .carousel-img {
         height: 100%;
-        object-fit: cover;
+        transform: scale(1.1);
     }
 }
 
+/* =========================
+   PAGE HEADER (SEPARATE SECTION)
+========================= */
 .page-header {
-    background: linear-gradient(rgba(15, 66, 41, .6), rgba(15, 66, 41, .6)), url(../img/carousel-1.jpg) center center no-repeat;
+    background: linear-gradient(rgba(15, 66, 41, 0.6), rgba(15, 66, 41, 0.6)),
+        url(../img/carousel-1.jpg) center center no-repeat;
     background-size: cover;
 }
-
-.page-header .breadcrumb-item+.breadcrumb-item::before {
-    color: var(--light);
-}
-
-.page-header .breadcrumb-item,
-.page-header .breadcrumb-item a {
-    font-size: 18px;
-    color: var(--light);
-}
-
-
 /*** Top Feature ***/
 @media (min-width: 991.98px) {
     .top-feature {

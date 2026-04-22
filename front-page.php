@@ -2,11 +2,10 @@
 get_header();
 
 // Check if the flexible content field has rows of data
-if (have_rows('page_sections')):
+if (have_rows('sections')):
 
     // Loop through each section layout
-    while (have_rows('page_sections')): the_row();
-
+    while (have_rows('sections')): the_row();
         // Render the Carousel section
         if (get_row_layout() == 'carousel'):
             get_template_part('template-parts/sections/carousel');
