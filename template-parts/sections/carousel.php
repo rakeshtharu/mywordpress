@@ -21,7 +21,6 @@
                         <div class="hero-image-wrapper">
                             <img class="hero-img" src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($image_alt); ?>">
                         </div>
-                        <!-- <img class="carousel-img" src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($image_alt); ?>"> -->
 
                         <div class="carousel-caption">
                             <div class="container">
