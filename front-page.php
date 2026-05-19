@@ -34,8 +34,12 @@ if (have_rows('sections')):
         elseif (get_row_layout() == 'quote'):
             get_template_part('template-parts/sections/quote');
 
+        // Render the floatingcard section
+        elseif (get_row_layout() == 'floatingcard'):
+            get_template_part('template-parts/sections/floatingcard');
 
-            // Render the quote section
+
+        // Render the quote section
         elseif (get_row_layout() == 'teams'):
             get_template_part('template-parts/sections/teams');
 
